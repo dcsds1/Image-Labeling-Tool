@@ -1,65 +1,42 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
-import codecs
-import os.path
-import re
+
 import sys
-import subprocess
-
-from functools import partial
-from collections import defaultdict
-
-
-if sys.version_info.major >= 3:
-    import sip
-    sip.setapi('QVariant', 2)
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+import os
 
 __appname__ = 'labelTool'
 
-def have_qstring():
-    '''p3/qt5 get rid of QString wrapper as py3 has native unicode str type'''
-    return not (sys.version_info.major >= 3 or QT_VERSION_STR.startswith('5.'))
+#def have_qstring():
+#    '''p3/qt5 get rid of QString wrapper as py3 has native unicode str type'''
+#    return not (sys.version_info.major >= 3 or QT_VERSION_STR.startswith('5.'))
+#
+#class WindowMixin(object):
+#
+#    def menu(self, title, actions=None):
+#        menu = self.menuBar().addMenu(title)
+#        if actions:
+#            addActions(menu, actions)
+#        return menu
 
-class WindowMixin(object):
-
-    def menu(self, title, actions=None):
-        menu = self.menuBar().addMenu(title)
-        if actions:
-            addActions(menu, actions)
-        return menu
-
-class MainWindow(QMainWindow, WindowMixin):
-    
+class MainWindow(QWidget):
     def __init__(self, defaultFilename=None, defaultPrefdefClassFile=None):
         super(MainWindow, self).__init__()
         self.setWindowTitle(__appname__)
 
-        listLayout = QVBoxLayout()
-        listLayout.setContentsMargins(0, 0, 0, 0)
-
         # Create a widget for using default label
+        useDefautLabelQHBoxLayout = QHBoxLayout()
+
         self.useDefautLabelCheckbox = QCheckBox(u'Use default label')
         self.useDefautLabelCheckbox.setChecked(False)
-        self.defaultLabelTextLine = QLineEdit()
-        useDefautLabelQHBoxLayout = QHBoxLayout()       
+        #self.defaultLabelTextLine = QLineEdit()
         useDefautLabelQHBoxLayout.addWidget(self.useDefautLabelCheckbox)
-        useDefautLabelQHBoxLayout.addWidget(self.defaultLabelTextLine)
-        useDefautLabelContainer = QWidget()
-        useDefautLabelContainer.setLayout(useDefautLabelQHBoxLayout)
+        #useDefautLabelQHBoxLayout.addWidget(self.defaultLabelTextLine)
+        #useDefautLabelContainer = QWidget()
+        #useDefautLabelContainer.setLayout(useDefautLabelQHBoxLayout)
+        self.setLayout(useDefautLabelQHBoxLayout)
 
-        # Create a widget for edit and diffc button
-        self.diffcButton = QCheckBox(u'difficult')
-        self.diffcButton.setChecked(False)
-        #self.diffcButton.stateChanged.connect(self.btnstate)
-        self.editButton = QToolButton()
-        self.editButton.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
-
-        # Add some of widgets to listLayout 
-        listLayout.addWidget(self.editButton)
-        listLayout.addWidget(self.diffcButton)
-        listLayout.addWidget(useDefautLabelContainer)
 
 def get_main_app(argv=[]):
     """
