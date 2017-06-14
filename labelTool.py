@@ -179,4 +179,4 @@ class Ui_MainWindow(object):
         self.action_Delete_BBox.setText(_translate("MainWindow", "&Delete BBox", None))
         self.action_Save.setText(_translate("MainWindow", "&Save", None))
 
-import resources_rc
+#import resources_rc
