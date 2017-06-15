@@ -9,6 +9,9 @@
 
 from PyQt4 import QtCore, QtGui
 
+from image_viewer_fix_ratio import ImageViewerQt
+
+
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -34,7 +37,8 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.gridLayout_2 = QtGui.QGridLayout(self.centralwidget)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
-        self.paintHere = QtGui.QGraphicsView(self.centralwidget)
+#        self.paintHere = QtGui.QGraphicsView(self.centralwidget)
+        self.paintHere = ImageViewerQt()
         self.paintHere.setMaximumSize(QtCore.QSize(1671, 16777215))
         self.paintHere.setObjectName(_fromUtf8("paintHere"))
         self.gridLayout_2.addWidget(self.paintHere, 0, 1, 17, 1)
