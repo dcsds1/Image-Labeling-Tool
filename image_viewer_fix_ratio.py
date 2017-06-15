@@ -153,8 +153,9 @@ class ImageViewerQt(QGraphicsView):
         scenePos = self.mapToScene(event.pos())
         if event.button() == Qt.LeftButton:
             if self.canPan:
-                self.setDragMode(QGraphicsView.ScrollHandDrag)
+                self.setDragMode(QGraphicsView.RubberBandDrag)
             self.leftMouseButtonPressed.emit(scenePos.x(), scenePos.y())
+            print scenePos.x(), scenePos.y() 
         elif event.button() == Qt.RightButton:
             if self.canZoom:
                 self.setDragMode(QGraphicsView.RubberBandDrag)
