@@ -41,11 +41,8 @@ class LabelTool(QtGui.QMainWindow, labelTool.Ui_MainWindow):
 
         self.paintHere.show()
 
-def main():
+if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     tool = LabelTool()
     tool.show()
     sys.exit(app.exec_())
-
-if __name__ == '__main__':
-    main()
