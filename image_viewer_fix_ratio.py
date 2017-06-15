@@ -14,10 +14,6 @@ except ImportError:
         raise ImportError("ImageViewerQt: Requires PyQt5 or PyQt4.")
 
 
-__author__ = "Marcel Goldschen-Ohm <marcel.goldschen@gmail.com>"
-__version__ = '0.9.0'
-
-
 class ImageViewerQt(QGraphicsView):
     """ PyQt image viewer widget for a QPixmap in a QGraphicsView scene with mouse zooming and panning.
     Displays a QImage or QPixmap (QImage is internally converted to a QPixmap).
@@ -193,6 +189,10 @@ class ImageViewerQt(QGraphicsView):
                 self.updateViewer()
             self.rightMouseButtonDoubleClicked.emit(scenePos.x(), scenePos.y())
         QGraphicsView.mouseDoubleClickEvent(self, event)
+
+    def wheelEvent(self, event):
+        factor = 1.41 ** (event.delta() / 240.0)
+        self.scale(factor, factor)
 
 
 if __name__ == '__main__':
